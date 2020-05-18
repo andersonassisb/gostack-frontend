@@ -6,6 +6,12 @@ import "./styles.css";
 function App() {
   const [repositories, setRepositories] = React.useState([]);
 
+  React.useEffect(() => {
+    api.get("repositories").then((response) => {
+      setRepositories(response.data);
+    });
+  }, []);
+
   async function handleAddRepository() {
     await api
       .post(`/repositories`, {
